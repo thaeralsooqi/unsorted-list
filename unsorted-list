@@ -1,0 +1,102 @@
+#include <iostream>
+using namespace std;
+const int max_item = 5;
+class UnsortedType
+{
+	int length;
+	int info[max_item];
+public:
+	UnsortedType()
+	{
+		length = 0;
+	}
+	//****************************************************
+	bool IsFull() const
+	{
+		return(length == max_item);
+	}
+	//****************************************************
+	bool IsEmpty() const
+	{
+		return (length == 0);
+	}
+	//****************************************************
+	int lengthIs() const 
+	{
+		return length;
+	}
+	//****************************************************
+	void makeEmpty()//clear list
+	{
+		length = 0;
+	}
+	//****************************************************
+	void print() const
+	{
+		for (int i = 0; i < length; i++)
+			cout << info[i] << " ";
+		cout << endl;
+	}
+	//****************************************************
+	int retriveItem(int item ) const //Search
+	{
+		int loc = 0;
+		bool found = false;
+		for (loc = 0 ; loc < length ; loc++)
+		if (info[loc] == item)
+	    {
+				found = true;
+			break;
+		}
+		if (found)
+			return loc;
+		else
+			return -1;
+			
+	}
+	//****************************************************
+	void insertItem(int item)
+	{
+		if (IsFull())
+			cout << "the list is full." << endl;
+		else
+		{
+			info[length] = item;
+			length++;
+		}
+	}
+	//****************************************************
+	void deleteItem(int item )
+	{
+		int loc;
+		if (IsEmpty())
+			cout << "the list is empty." << endl;
+		else
+		{
+			loc = retriveItem(item);
+			if (loc != -1)
+			{
+				for (int i = loc; i < length - 1; i++)
+					info[i] = info[i + 1];
+				length--;
+			}
+			else
+				cout << "the item is not in the list." << endl;
+		}
+	}
+};
+int main()
+{
+	UnsortedType o1;
+	o1.insertItem(5);
+	o1.insertItem(4);
+	o1.insertItem(7);
+	o1.insertItem(8);
+	o1.insertItem(9);
+	o1.print();
+	o1.deleteItem(4);
+	o1.print();
+	cout<<o1.retriveItem(9)<<endl;
+	cout << o1.lengthIs()<<endl;
+	return 0;
+}
